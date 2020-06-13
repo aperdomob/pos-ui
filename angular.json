@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pos-ui"
+    }
+  },
+  "defaultProject": "pos-ui",
+  "cli": {
+    "analytics": false
+  }
 }
