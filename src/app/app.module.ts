@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, DEFAULT_CURRENCY_CODE } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +30,7 @@ registerLocaleData(es);
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: es_ES }],
+  providers: [{provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

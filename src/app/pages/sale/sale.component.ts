@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { SalesModalComponent } from './components/sales-modal/sales-modal.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sale',
@@ -9,15 +9,14 @@ import { SalesModalComponent } from './components/sales-modal/sales-modal.compon
 })
 export class SaleComponent implements OnInit {
 
-  constructor(private modalService: NzModalService) { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
   newSale() {
-    this.modalService.create({
-      nzTitle: 'Venta',
-      nzContent: SalesModalComponent
+    const dialogRef = this.dialog.open(SalesModalComponent, {
+      width: '850px'
     })
   }
 }
