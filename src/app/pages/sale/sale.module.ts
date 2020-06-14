@@ -7,17 +7,21 @@ import { SalesModalComponent } from './components/sales-modal/sales-modal.compon
 
 import { SalesItemComponent } from './components/sales-item/sales-item.component'
 
-import { DemoNgZorroAntdModule } from './ng-zorro-antd.module';
+import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { ProductSearchComponent } from './components/product-search/product-search.component'
 
 @NgModule({
   imports: [
     CommonModule,
     SaleRoutingModule,
     DemoNgZorroAntdModule,
+    FormsModule
   ],
-  declarations: [SaleComponent, SalesModalComponent, SalesItemComponent],
+  declarations: [SaleComponent, SalesModalComponent, SalesItemComponent, ProductSearchComponent],
   exports: [SalesItemComponent]
 })
 export class SaleModule { }
