@@ -8,20 +8,16 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+      <li nz-submenu nzOpen nzTitle="Ventas">
         <ul>
-          <li nz-submenu nzOpen nzTitle="Ventas">
-            <ul>
-              <li nz-menu-item nzMatchRouter> <a routerLink="/sales">Nueva</a>
-              <li nz-menu-item nzMatchRouter> <a routerLink="/cash-register">Caja</a>
-            </ul>
-            <li nz-submenu nzOpen nzTitle="Productos">
-              <ul>
-                <li nz-menu-item nzMatchRouter> <a routerLink="/stocktaking">Inventario</a>
-                <li nz-menu-item nzMatchRouter> <a routerLink="/purchases">Compras</a>
-              </ul>
-          </ul>
-      </li>
+          <li nz-menu-item nzMatchRouter> <a routerLink="/cash-register">Caja</a>
+          <li nz-menu-item nzMatchRouter> <a routerLink="/sales">Nueva</a>
+        </ul>
+      <li nz-submenu nzOpen nzTitle="Productos">
+        <ul>
+          <li nz-menu-item nzMatchRouter> <a routerLink="/stocktaking">Inventario</a>
+          <li nz-menu-item nzMatchRouter> <a routerLink="/purchases">Compras</a>
+        </ul>
       <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter>

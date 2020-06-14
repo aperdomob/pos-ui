@@ -30,7 +30,7 @@ registerLocaleData(es);
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{provide: DEFAULT_CURRENCY_CODE, useValue: 'USD'}],
+  providers: [{ provide: NZ_I18N, useValue: es_ES }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
