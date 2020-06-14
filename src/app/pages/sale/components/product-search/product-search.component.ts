@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { SearchProductService } from '../../services/search-product.service';
 
 @Component({
   selector: 'app-product-search',
@@ -10,15 +11,15 @@ export class ProductSearchComponent implements OnInit {
   searchValue: string = "";
   isConfirmLoading = true;
 
-  listOfData = [
-    { name: 'Acetaminofen 500mg (Tableta)', reference: '770303804029', price: 24, available: 34},
-    { name: 'Noravel Gripa y Tos (Caja)', reference: '7702057162252', price: 43, available: 5},
-    { name: 'Azitromicina 500mg (Caja)', reference: '7703712030206', price: 2,  available: 834},
-    ];
+  listOfData = [];
 
-  constructor(private modal: NzModalRef) { }
+  constructor(
+    private modal: NzModalRef,
+    private searchProductService: SearchProductService) { }
 
   ngOnInit(): void {
+    this.searchProductService.getPattern().subscribe((pattern) => this.searchValue = pattern);
+    this.searchProductService.getLastResults().subscribe(result => this.listOfData = result);
   }
 
   searchProduct() {
@@ -27,5 +28,25 @@ export class ProductSearchComponent implements OnInit {
 
   destroyModal(): void {
     this.modal.destroy();
+  }
+
+  add(item) {
+    item.total++;
+  }
+
+  remove(item) {
+    item.total--;
+  }
+
+  areAvailable(item) {
+    return item.available <= item.total;
+  }
+
+  isEqualOrLessThanZero(item) {
+    return item.total <= 0;
+  }
+
+  sell(item) {
+    
   }
 }

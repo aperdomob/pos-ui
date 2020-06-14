@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { ProductSearchComponent } from '../product-search/product-search.component';
+import { SearchProductService } from '../../services/search-product.service';
 
 @Component({
   selector: 'app-sales-item',
@@ -19,7 +20,9 @@ export class SalesItemComponent {
     { item: 'Swim suit', cost: 15, amount: 1 },
   ];
 
-  constructor(private modalService: NzModalService) { }
+  constructor(
+    private modalService: NzModalService,
+    private searchProductService: SearchProductService) { }
 
   getTotalByItem(item) {
     return item.cost * item.amount;
@@ -38,10 +41,12 @@ export class SalesItemComponent {
   }
 
   searchProduct() {
-    this.modalService.create({
-      nzTitle: 'Buscar Producto',
-      nzWidth: 1000,
-      nzContent: ProductSearchComponent
+    this.searchProductService.search(this.searchValue).subscribe(() => {
+      this.modalService.create({
+        nzTitle: 'Buscar Producto',
+        nzWidth: 1000,
+        nzContent: ProductSearchComponent
+      });
     });
   }
 
