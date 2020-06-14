@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { SalesModalComponent } from './components/sales-modal/sales-modal.component';
 
 @Component({
   selector: 'app-sale',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaleComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: NzModalService) { }
 
   ngOnInit() {
   }
 
+  newSale() {
+    this.modalService.create({
+      nzTitle: 'Venta',
+      nzContent: SalesModalComponent
+    })
+  }
 }
