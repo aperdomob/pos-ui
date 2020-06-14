@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-product-search',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductSearchComponent implements OnInit {
   searchValue: string = "";
+  isConfirmLoading = true;
 
   listOfData = [
     { name: 'Acetaminofen 500mg (Tableta)', reference: '770303804029', price: 24, available: 34},
@@ -14,12 +16,16 @@ export class ProductSearchComponent implements OnInit {
     { name: 'Azitromicina 500mg (Caja)', reference: '7703712030206', price: 2,  available: 834},
     ];
 
-  constructor() { }
+  constructor(private modal: NzModalRef) { }
 
   ngOnInit(): void {
   }
 
   searchProduct() {
 
+  }
+
+  destroyModal(): void {
+    this.modal.destroy();
   }
 }
