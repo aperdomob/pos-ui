@@ -11,7 +11,7 @@
     <tr>
       <th>Producto</th>
       <th>Cantidad</th>
-      <th>Costo</th>
+      <th>Valor</th>
       <th>Total</th>
     </tr>
   </thead>
@@ -19,7 +19,7 @@
     <tr *ngFor="let data of basicTable.data">
       <td>{{data.item}}</td>
       <td style="text-align:right">{{data.amount}}</td>
-      <td style="text-align:right">{{data.cost | currency }}</td>
+      <td style="text-align:right">{{data.price | currency }}</td>
       <td style="text-align:right">{{getTotalByItem(data) | currency}}</td>
     </tr>
   </tbody>

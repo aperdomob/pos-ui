@@ -12,7 +12,9 @@
       <th>Nombre</th>
       <th>Referencia</th>
       <th>Disponibles</th>
-      <th>Valor</th>
+      <th>Precio Base</th>
+      <th>Precio</th>
+      <th>Descuento</th>
       <th>Adicionar</th>
       <th>Acciones</th>
     </tr>
@@ -22,7 +24,9 @@
       <td>{{data.name}}</td>
       <td>{{data.reference}}</td>
       <td style="text-align:right">{{data.available}}</td>
+      <td style="text-align:right">{{data.cost | currency }}</td>
       <td style="text-align:right">{{data.price | currency }}</td>
+      <td style="text-align:right">{{0 | currency }}</td>
       <td style="text-align:right">{{data.total}}</td>
       <td>
         <button nz-button nzShape="round" (click)="add(data)"  [disabled]="areAvailable(data)"><i nz-icon nzType="plus"></i></button>
@@ -31,14 +35,6 @@
       </td>
     </tr>
   </tbody>
-  <!-- <tfoot>
-    <tr>
-      <th>Total</th>
-      <th style="text-align:right"></th>
-      <th style="text-align:right"></th>
-      <th style="text-align:right">{{getTotal() | currency}}</th>
-    </tr>
-  </tfoot> -->
 </nz-table>
 
 <div *nzModalFooter>

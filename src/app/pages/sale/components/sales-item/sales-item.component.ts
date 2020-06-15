@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { ProductSearchComponent } from '../product-search/product-search.component';
 import { SearchProductService } from '../../services/search-product.service';
+import { SellService } from '../../services/sell.service';
+import { ProductSale } from '../../interfaces/product-sale.interface';
 
 @Component({
   selector: 'app-sales-item',
   templateUrl: './sales-item.component.html',
   styleUrls: ['./sales-item.component.css']
 })
-export class SalesItemComponent {
+export class SalesItemComponent implements OnInit {
   searchValue: string = "";
 
-  listOfData = [
-    { item: 'Beach ball', cost: 4, amount: 4 },
-    { item: 'Towel', cost: 5, amount: 2 },
-    { item: 'Frisbee', cost: 2, amount: 1 },
-    { item: 'Sunscreen', cost: 4, amount: 10 },
-    { item: 'Cooler', cost: 25, amount: 3 },
-    { item: 'Swim suit', cost: 15, amount: 1 },
-  ];
+  listOfData: ProductSale[] = [];
 
   constructor(
     private modalService: NzModalService,
-    private searchProductService: SearchProductService) { }
+    private searchProductService: SearchProductService,
+    private sellService: SellService) { }
 
-  getTotalByItem(item) {
-    return item.cost * item.amount;
+  ngOnInit() {
+    this.sellService.data$.subscribe((item: ProductSale) => {
+      this.listOfData = [...this.listOfData, item];
+    });
+  }
+
+  getTotalByItem(item: ProductSale) {
+    return item.price * item.amount;
   }
 
   getTotalAmount() {
@@ -33,18 +35,18 @@ export class SalesItemComponent {
   }
 
   getTotalCost() {
-    return this.listOfData.reduce((pv, cv) => pv + cv.cost, 0);
+    return this.listOfData.reduce((pv, cv) => pv + cv.price, 0);
   }
 
   getTotal() {
-    return this.listOfData.reduce((pv, cv) => pv + cv.cost * cv.amount, 0);
+    return this.listOfData.reduce((pv, cv) => pv + cv.price * cv.amount, 0);
   }
 
   searchProduct() {
     this.searchProductService.search(this.searchValue).subscribe(() => {
       this.modalService.create({
         nzTitle: 'Buscar Producto',
-        nzWidth: 1000,
+        nzWidth: 1200,
         nzContent: ProductSearchComponent
       });
     });

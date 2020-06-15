@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { SearchProductService } from '../../services/search-product.service';
+import { SellService } from '../../services/sell.service';
+import { SearchProduct } from '../../interfaces/search-product.interface';
 
 @Component({
   selector: 'app-product-search',
@@ -11,11 +13,12 @@ export class ProductSearchComponent implements OnInit {
   searchValue: string = "";
   isConfirmLoading = true;
 
-  listOfData = [];
+  listOfData: SearchProduct[] = [];
 
   constructor(
     private modal: NzModalRef,
-    private searchProductService: SearchProductService) { }
+    private searchProductService: SearchProductService,
+    private sellService: SellService) { }
 
   ngOnInit(): void {
     this.searchProductService.getPattern().subscribe((pattern) => this.searchValue = pattern);
@@ -47,6 +50,6 @@ export class ProductSearchComponent implements OnInit {
   }
 
   sell(item) {
-    
+    this.sellService.addItem(item);
   }
 }
