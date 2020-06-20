@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { ProductComponent } from '../product/product.component';
 
 @Component({
   selector: 'app-product-overview',
@@ -17,9 +19,17 @@ export class ProductOverviewComponent implements OnInit {
   checked = false;
   indeterminate = false;
 
-  constructor() { }
+  constructor(private modalService: NzModalService) { }
 
   ngOnInit(): void {
+  }
+
+  addProduct() {
+    this.modalService.create({
+      nzTitle: 'Crear Producto',
+      nzWidth: 500,
+      nzContent: ProductComponent
+    })
   }
 
   searchProduct() {

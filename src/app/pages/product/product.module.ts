@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { ProductOverviewComponent } from './components/product-overview/product-overview.component';
 import { ProductRoutingModule } from './product-routing.module';
 import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductComponent } from './components/product/product.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
 @NgModule({
-  declarations: [ProductOverviewComponent],
+  declarations: [ProductOverviewComponent, ProductComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
     DemoNgZorroAntdModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductModule { }

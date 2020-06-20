@@ -1,0 +1,25 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">Nombre</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Ingrese el nombre del producto">
+      <input nz-input formControlName="name" id="name" nzTitle="hello" placeholder="Nombre del producto"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="reference" nzRequired>Referencia</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Ingrese el código de barras del producto">
+      <input nz-input id="reference" formControlName="reference"  placeholder="Referencia del producto"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="price" nzRequired>Precio</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="El precio debe ser mayor a 0">
+      <nz-input-number nzId="price" formControlName="price" [nzFormatter]="formatterDollar" [nzParser]="parserDollar" [nzMin]="0" [nzMax]="10000000"></nz-input-number>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<div *nzModalFooter>
+  <button nz-button nzType="primary" nzShape="round" (click)="handleOk()">Guardar</button>
+  <button nz-button nzType="primary" nzShape="round" (click)="handleCancel()" nzDanger>Cancelar</button>
+</div>
