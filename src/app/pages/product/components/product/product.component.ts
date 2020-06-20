@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +18,17 @@ export class ProductComponent implements OnInit {
     }
 
     if (this.validateForm.status === "VALID") {
-      console.log('the form is valid');
+      this.productService.save(this.getProduct()).subscribe(() => {
+        this.destroyModal();
+      });
+    }
+  }
+
+  private getProduct() {
+    return {
+      name: this.validateForm.get('name').value,
+      reference: this.validateForm.get('reference').value,
+      price: this.validateForm.get('price').value
     }
   }
 
@@ -30,16 +41,13 @@ export class ProductComponent implements OnInit {
     return {};
   };
 
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
-  }
-
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
 
   constructor(
     private fb: FormBuilder,
-    private modal: NzModalRef,) { }
+    private modal: NzModalRef,
+    private productService: ProductService) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({

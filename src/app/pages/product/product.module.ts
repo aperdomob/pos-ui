@@ -5,7 +5,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule }    from '@angular/common/http';
 
 
 
@@ -16,7 +16,8 @@ import { BrowserModule } from '@angular/platform-browser';
     ProductRoutingModule,
     DemoNgZorroAntdModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class ProductModule { }
