@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ProductComponent } from '../product/product.component';
+import { ProductService } from '../../services/product.service';
+import { Product } from 'src/app/domain/Product';
 
 @Component({
   selector: 'app-product-overview',
@@ -9,31 +11,45 @@ import { ProductComponent } from '../product/product.component';
 })
 export class ProductOverviewComponent implements OnInit {
   searchValue: String;
-  listOfData = [{
-    name: 'ubuprofeno',
-    reference: '12432321132',
-    price: '23000'
-  }];
+  listOfData: Product[] = [];
   listOfCurrentPageData = [];
   setOfCheckedId = new Set<number>();
   checked = false;
   indeterminate = false;
 
-  constructor(private modalService: NzModalService) { }
+  closeDialogEvent = new EventEmitter();
+
+  constructor(
+    private modalService: NzModalService,
+    private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.closeDialogEvent.subscribe((data: Product) => {
+      if (data) {
+        this.listOfData = [data, ...this.listOfData]
+      }
+    });
+
+    this.productService.getAll().subscribe((response) => {
+      this.listOfData = response;
+    });
   }
 
   addProduct() {
     this.modalService.create({
       nzTitle: 'Crear Producto',
       nzWidth: 500,
-      nzContent: ProductComponent
-    })
+      nzContent: ProductComponent,
+      nzAfterClose: this.closeDialogEvent
+    });
   }
 
   searchProduct() {
 
+  }
+
+  handleOk(): void {
+    console.log('called');
   }
 
   updateCheckedSet(id: number, checked: boolean): void {

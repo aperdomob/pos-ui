@@ -11,6 +11,17 @@ interface ProductDto {
   price: number;
 }
 
+interface ProductCollectionResponse {
+  _embedded: {
+    productDtoList: {
+      id: number;
+      name: string;
+      reference: string;
+      price: number
+    }[]
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,12 +37,24 @@ export class ProductService {
     return this.http
       .post<ProductDto>(this.posUrl, product, this.httpOptions)
       .pipe(
-        map((bodyResponse: ProductDto): Product => ({
-          id: bodyResponse.id,
-          name: bodyResponse.name,
-          reference: bodyResponse.reference,
-          price: bodyResponse.price
-        }))
+        map((bodyResponse: ProductDto): Product => this.mapperToDomain(bodyResponse))
       );
+  }
+
+  public getAll(): Observable<Product[]> {
+    return this.http.get<ProductCollectionResponse>(this.posUrl).pipe(
+      map((response) => {
+        return response._embedded.productDtoList.map((product) => this.mapperToDomain(product));
+      }
+    ));
+  }
+
+  private mapperToDomain(product: ProductDto): Product {
+    return {
+      id: product.id,
+      name: product.name,
+      reference: product.reference,
+      price: product.price
+    };
   }
 }

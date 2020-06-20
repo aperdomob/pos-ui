@@ -11,19 +11,6 @@ import { ProductService } from '../../services/product.service';
 export class ProductComponent implements OnInit {
   validateForm!: FormGroup;
 
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
-
-    if (this.validateForm.status === "VALID") {
-      this.productService.save(this.getProduct()).subscribe(() => {
-        this.destroyModal();
-      });
-    }
-  }
-
   private getProduct() {
     return {
       name: this.validateForm.get('name').value,
@@ -60,14 +47,19 @@ export class ProductComponent implements OnInit {
   }
 
   handleOk() {
-    this.submitForm();
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+
+    if (this.validateForm.status === "VALID") {
+      this.productService.save(this.getProduct()).subscribe((product) => {
+        this.modal.destroy(product);
+      });
+    }
   }
 
   handleCancel() {
-    this.destroyModal();
-  }
-
-  destroyModal(): void {
     this.modal.destroy();
   }
 }

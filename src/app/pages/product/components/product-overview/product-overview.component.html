@@ -22,7 +22,7 @@
     <tr>
       <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)"></th>
       <th>Nombre</th>
-      <th style="text-align:right">Referencia</th>
+      <th>Referencia</th>
       <th style="text-align:right">Precio</th>
       <th></th>
     </tr>
@@ -35,11 +35,11 @@
             (nzCheckedChange)="onItemChecked(data.id, $event)"
       ></td>
       <td>{{data.name}}</td>
-      <td style="text-align:right">{{data.reference}}</td>
+      <td>{{data.reference}}</td>
       <td style="text-align:right">{{data.price | currency }}</td>
       <td style="text-align:right">
-        <button nz-button nzType="primary" nzShape="round"><i nz-icon nzType="edit"></i></button>
-        <button nz-button nzType="primary" nzShape="round" nzDanger><i nz-icon nzType="delete"></i></button>
+        <button nz-button nzType="primary" nzShape="circle"><i nz-icon nzType="edit"></i></button>
+        <button nz-button nzType="primary" nzShape="circle" nzDanger><i nz-icon nzType="delete"></i></button>
       </td>
     </tr>
   </tbody>
