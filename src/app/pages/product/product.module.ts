@@ -6,11 +6,12 @@ import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductComponent } from './components/product/product.component';
 import { HttpClientModule }    from '@angular/common/http';
+import { StocktakingOverviewComponent } from './components/stocktaking-overview/stocktaking-overview.component';
 
 
 
 @NgModule({
-  declarations: [ProductOverviewComponent, ProductComponent],
+  declarations: [ProductOverviewComponent, ProductComponent, StocktakingOverviewComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,

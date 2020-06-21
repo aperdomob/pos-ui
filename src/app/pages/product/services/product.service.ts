@@ -12,7 +12,7 @@ interface ProductDto {
 }
 
 interface ProductCollectionResponse {
-  _embedded: {
+  _embedded?: {
     productDtoList: {
       id: number;
       name: string;
@@ -28,7 +28,11 @@ interface ProductCollectionResponse {
 export class ProductService {
   private posUrl = 'http://localhost:8080/products'
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Methods': 'PUT',
+      'Access-Control-Allow-Origin': '*'
+    })
   };
 
   constructor(private http: HttpClient) { }
@@ -41,12 +45,28 @@ export class ProductService {
       );
   }
 
+  public update(product: ProductDto): Observable<Product> {
+    return this.http
+      .put<ProductDto>(`${this.posUrl}/${product.id}`, product, this.httpOptions)
+      .pipe(
+        map((bodyResponse: ProductDto): Product => this.mapperToDomain(bodyResponse))
+      );
+  }
+
   public getAll(): Observable<Product[]> {
     return this.http.get<ProductCollectionResponse>(this.posUrl).pipe(
       map((response) => {
-        return response._embedded.productDtoList.map((product) => this.mapperToDomain(product));
+        if (response._embedded) {
+          return response._embedded.productDtoList.map((product) => this.mapperToDomain(product));
+        }
+
+        return [];
       }
     ));
+  }
+
+  delete(productId: any): Observable<void> {
+    return this.http.delete<void>(`${this.posUrl}/${productId}`);
   }
 
   private mapperToDomain(product: ProductDto): Product {

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { ProductService } from '../../services/product.service';
+import { Product } from 'src/app/domain/Product';
 
 @Component({
   selector: 'app-product',
@@ -9,10 +10,13 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+  @Input() product: Product;
+
   validateForm!: FormGroup;
 
   private getProduct() {
     return {
+      id: this.product ? this.product.id : null,
       name: this.validateForm.get('name').value,
       reference: this.validateForm.get('reference').value,
       price: this.validateForm.get('price').value
@@ -43,7 +47,13 @@ export class ProductComponent implements OnInit {
       price: [null, [Validators.required, this.priceValidator]]
     });
 
-    this.validateForm.get('price').setValue(0);
+    if (this.product) {
+      this.validateForm.get('name').setValue(this.product.name);
+      this.validateForm.get('reference').setValue(this.product.reference);
+      this.validateForm.get('price').setValue(this.product.price);
+    } else {
+      this.validateForm.get('price').setValue(0);
+    }
   }
 
   handleOk() {
@@ -53,9 +63,15 @@ export class ProductComponent implements OnInit {
     }
 
     if (this.validateForm.status === "VALID") {
-      this.productService.save(this.getProduct()).subscribe((product) => {
-        this.modal.destroy(product);
-      });
+      if (this.product) {
+        this.productService.update(this.getProduct()).subscribe((product) => {
+          this.modal.destroy(product);
+        });
+      } else {
+        this.productService.save(this.getProduct()).subscribe((product) => {
+          this.modal.destroy(product);
+        });
+      }
     }
   }
 

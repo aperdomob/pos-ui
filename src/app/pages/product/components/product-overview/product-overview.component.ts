@@ -3,6 +3,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { ProductComponent } from '../product/product.component';
 import { ProductService } from '../../services/product.service';
 import { Product } from 'src/app/domain/Product';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-product-overview',
@@ -26,6 +27,12 @@ export class ProductOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.closeDialogEvent.subscribe((data: Product) => {
       if (data) {
+        const index = this.listOfData.findIndex((item) => item.id == data.id);
+
+        if (index !== -1) {
+          this.listOfData.splice(index);
+        }
+
         this.listOfData = [data, ...this.listOfData]
       }
     });
@@ -41,6 +48,32 @@ export class ProductOverviewComponent implements OnInit {
       nzWidth: 500,
       nzContent: ProductComponent,
       nzAfterClose: this.closeDialogEvent
+    });
+  }
+
+  editProduct(product: Product) {
+    this.modalService.create({
+        nzTitle: 'Crear Producto',
+        nzWidth: 500,
+        nzContent: ProductComponent,
+        nzAfterClose: this.closeDialogEvent,
+        nzComponentParams: {
+          product
+        }
+      });
+  }
+
+  deleteProduct(product: Product) {
+    this.productService.delete(product.id).subscribe(() => {
+      this.listOfData = this.listOfData.filter((p) => p.id !== product.id);
+    });
+  }
+
+  deleteSelected() {
+    const ids = Array.from(this.setOfCheckedId);
+
+    forkJoin(ids.map((id) => this.productService.delete(id))).subscribe(() => {
+      this.listOfData = this.listOfData.filter((product) => !ids.includes(product.id))
     });
   }
 
@@ -76,7 +109,7 @@ export class ProductOverviewComponent implements OnInit {
   }
 
   refreshCheckedStatus(): void {
-    this.checked = this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
+    this.checked = this.listOfData.length > 0 && this.listOfCurrentPageData.every(item => this.setOfCheckedId.has(item.id));
     this.indeterminate = this.listOfCurrentPageData.some(item => this.setOfCheckedId.has(item.id)) && !this.checked;
   }
 }
