@@ -8,24 +8,17 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Ventas">
+      <li nz-submenu nzOpen nzIcon="shopping" nzTitle="Ventas">
         <ul>
           <li nz-menu-item nzMatchRouter> <a routerLink="/cash-register">Caja</a>
           <li nz-menu-item nzMatchRouter> <a routerLink="/sales">Nueva</a>
         </ul>
-      <li nz-submenu nzOpen nzTitle="Productos">
+      <li nz-submenu nzOpen nzIcon="shopping-cart" nzTitle="Productos">
         <ul>
           <li nz-menu-item nzMatchRouter> <a routerLink="/products">General</a>
           <li nz-menu-item nzMatchRouter> <a routerLink="/stocktaking">Inventario</a>
           <li nz-menu-item nzMatchRouter> <a routerLink="/purchases">Compras</a>
         </ul>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
-          </li>
-        </ul>
-      </li>
     </ul>
   </nz-sider>
   <nz-layout>
