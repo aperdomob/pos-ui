@@ -5,8 +5,8 @@ import { ProductOverviewComponent } from './components/product-overview/product-
 import { StocktakingOverviewComponent } from './components/stocktaking-overview/stocktaking-overview.component';
 
 const routes: Routes = [
-  { path: '', component: ProductOverviewComponent },
-  { path: 'stocktaking', component: ProductOverviewComponent },
+  { path: 'products', component: ProductOverviewComponent },
+  { path: 'stocktaking', component: StocktakingOverviewComponent },
 ];
 
 @NgModule({
