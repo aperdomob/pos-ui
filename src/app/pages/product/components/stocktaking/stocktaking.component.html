@@ -1,0 +1,30 @@
+<form nz-form [formGroup]="validateForm" nzLayout="inline">
+    <nz-form-item>
+      <nz-form-label nzRequired nzFor="product">Producto</nz-form-label>
+      <nz-form-control nzErrorTip="Seleccione el producto">
+        <input nz-input class="input-form" formControlName="name" id="name" placeholder="Referencia" (keyup.enter)="handleSearchProduct()"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="available" nzRequired>Cantidad</nz-form-label>
+      <nz-form-control nzErrorTip="Ingrese un valor mayor o igual a 0">
+        <nz-input-number class="input-form" fnzId="available" formControlName="available" [nzMin]="0"></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="cost" nzRequired>Valor</nz-form-label>
+      <nz-form-control nzErrorTip="Ingrese el valor de compra">
+        <nz-input-number class="input-form" fnzId="cost" formControlName="cost" [nzFormatter]="formatterDollar" [nzParser]="parserDollar" [nzMin]="0" [nzMax]="10000000">
+        </nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+</form>
+
+<div class="search-result-list">
+  Search Result List
+</div>
+
+<div *nzModalFooter>
+  <button nz-button nzType="primary" nzShape="round" (click)="handleOk()">Guardar</button>
+  <button nz-button nzType="primary" nzShape="round" (click)="handleCancel()" nzDanger>Cancelar</button>
+</div>

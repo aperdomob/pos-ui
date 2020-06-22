@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Stocktaking } from 'src/app/domain/Stocktaking';
+import { StocktakingComponent } from '../stocktaking/stocktaking.component';
 
 @Component({
   selector: 'app-stocktaking-overview',
@@ -50,13 +51,13 @@ export class StocktakingOverviewComponent implements OnInit {
     // });
   }
 
-  addProduct() {
-    // this.modalService.create({
-    //   nzTitle: 'Crear Producto',
-    //   nzWidth: 500,
-    //   nzContent: ProductComponent,
-    //   nzAfterClose: this.closeDialogEvent
-    // });
+  add() {
+    this.modalService.create({
+      nzTitle: 'Agregar Inventario',
+      nzWidth: 1200,
+      nzContent: StocktakingComponent,
+      // nzAfterClose: this.closeDialogEvent
+    });
   }
 
   // editProduct(product: Product) {

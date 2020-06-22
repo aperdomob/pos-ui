@@ -8,7 +8,7 @@
 <br>
 <div class="buttons">
   <div>
-    <button nz-button nzType="primary" nzShape="round" (click)="addProduct()"><i nz-icon nzType="plus"></i>Nuevo</button>
+    <button nz-button nzType="primary" nzShape="round" (click)="add()"><i nz-icon nzType="plus"></i>Nuevo</button>
     <button nz-button nzType="primary" nzShape="round" nzDanger (click)="deleteSelected()"><i nz-icon nzType="delete"></i>Eliminar</button>
   </div>
 </div>
@@ -26,7 +26,6 @@
       <th style="text-align:right">Cantidad</th>
       <th style="text-align:right">Precio</th>
       <th style="text-align:right">Valor</th>
-      <th style="text-align:right"></th>
       <th></th>
     </tr>
   </thead>
