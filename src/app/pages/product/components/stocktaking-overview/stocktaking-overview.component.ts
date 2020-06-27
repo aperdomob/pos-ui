@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Stocktaking } from 'src/app/domain/Stocktaking';
 import { StocktakingComponent } from '../stocktaking/stocktaking.component';
+import { StocktakingService } from '../../services/stocktaking.service';
 
 @Component({
   selector: 'app-stocktaking-overview',
@@ -10,17 +11,7 @@ import { StocktakingComponent } from '../stocktaking/stocktaking.component';
 })
 export class StocktakingOverviewComponent implements OnInit {
   searchValue: String;
-  listOfData: Stocktaking[] = [{
-    id: 1,
-    product: {
-      id: 1,
-      name: 'Ubuprofeno',
-      reference: '1332321',
-      price: 20000
-    },
-    cost: 1000,
-    available: 200
-  }];
+  listOfData: Stocktaking[] = [];
 
   listOfCurrentPageData = [];
   setOfCheckedId = new Set<number>();
@@ -31,9 +22,12 @@ export class StocktakingOverviewComponent implements OnInit {
 
   constructor(
     private modalService: NzModalService,
-    /*private productService: ProductService*/) { }
+    private stocktakingService: StocktakingService) { }
 
   ngOnInit(): void {
+    this.stocktakingService.all().subscribe((items: Stocktaking[]) => {
+      this.listOfData = [...items]
+    });
     // this.closeDialogEvent.subscribe((data: Product) => {
     //   if (data) {
     //     const index = this.listOfData.findIndex((item) => item.id == data.id);
