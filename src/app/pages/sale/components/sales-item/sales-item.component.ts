@@ -4,6 +4,7 @@ import { ProductSearchComponent } from '../product-search/product-search.compone
 import { SearchProductService } from '../../services/search-product.service';
 import { SellService } from '../../services/sell.service';
 import { ProductSale } from '../../interfaces/product-sale.interface';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-sales-item',
@@ -18,7 +19,8 @@ export class SalesItemComponent implements OnInit {
   constructor(
     private modalService: NzModalService,
     private searchProductService: SearchProductService,
-    private sellService: SellService) { }
+    private sellService: SellService,
+    private notification: NzNotificationService) { }
 
   ngOnInit() {
     this.sellService.data$.subscribe((item: ProductSale) => {
@@ -43,10 +45,34 @@ export class SalesItemComponent implements OnInit {
   }
 
   searchProduct() {
-    this.searchProductService.search(this.searchValue).subscribe(() => {
+    this.searchProductService.search(this.searchValue).subscribe((result) => {
+      if (result.length === 0) {
+        this.notification.error(
+          'Producto',
+          `No se encontro ningun producto con el patron ${this.searchValue}`,
+          {
+            nzPlacement: 'bottomRight',
+            nzDuration: 5000
+          }
+        );
+        return;
+      }
+      if (result.length === 1) {
+        this.listOfData = [ {
+          item: result[0].name,
+          amount: result[0].total,
+          price: result[0].price
+        },
+        ...this.listOfData]
+
+        this.searchValue = "";
+
+        return;
+      }
+
       this.modalService.create({
         nzTitle: 'Buscar Producto',
-        nzWidth: 1200,
+        nzWidth: 1500,
         nzContent: ProductSearchComponent
       });
     });

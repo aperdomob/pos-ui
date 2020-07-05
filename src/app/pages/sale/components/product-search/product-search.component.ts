@@ -22,7 +22,8 @@ export class ProductSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchProductService.getPattern().subscribe((pattern) => this.searchValue = pattern);
-    this.searchProductService.getLastResults().subscribe(result => this.listOfData = result);
+
+    this.searchProductService.observer().subscribe(result => this.listOfData = result);
   }
 
   searchProduct() {
