@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { SearchProduct } from '../interfaces/search-product.interface';
 import { HttpClient } from '@angular/common/http';
-import { query } from '@angular/animations';
 import { map } from 'rxjs/operators';
 
 

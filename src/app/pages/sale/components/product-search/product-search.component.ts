@@ -27,7 +27,7 @@ export class ProductSearchComponent implements OnInit {
   }
 
   searchProduct() {
-
+    this.searchProductService.search(this.searchValue).subscribe(() => {});
   }
 
   destroyModal(): void {
