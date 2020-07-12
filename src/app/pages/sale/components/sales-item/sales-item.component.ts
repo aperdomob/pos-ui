@@ -5,6 +5,7 @@ import { SearchProductService } from '../../services/search-product.service';
 import { SellService } from '../../services/sell.service';
 import { ProductSale } from '../../interfaces/product-sale.interface';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { PrintBillService } from '../../services/print-bill.service';
 
 @Component({
   selector: 'app-sales-item',
@@ -20,7 +21,8 @@ export class SalesItemComponent implements OnInit {
     private modalService: NzModalService,
     private searchProductService: SearchProductService,
     private sellService: SellService,
-    private notification: NzNotificationService) { }
+    private notification: NzNotificationService,
+    private printBillService: PrintBillService) { }
 
   ngOnInit() {
     this.sellService.data$.subscribe((item: ProductSale) => {
@@ -91,5 +93,11 @@ export class SalesItemComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  onPrintInvoice() {
+    const invoiceIds = ['101', '102'];
+    this.printBillService
+      .printDocument('invoice', invoiceIds);
   }
 }

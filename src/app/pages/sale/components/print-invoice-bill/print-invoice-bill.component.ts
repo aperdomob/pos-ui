@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PrintBillService } from '../../services/print-bill.service';
 
 @Component({
   selector: 'app-print-invoice-bill',
@@ -10,7 +11,7 @@ export class PrintInvoiceBillComponent implements OnInit {
   invoiceIds: string[];
   invoiceDetails: Promise<any>[];
 
-  constructor(route: ActivatedRoute) {
+  constructor(route: ActivatedRoute, private printBillService: PrintBillService) {
     this.invoiceIds = route.snapshot.params['invoiceIds']
       .split(',');
   }
@@ -19,7 +20,7 @@ export class PrintInvoiceBillComponent implements OnInit {
     this.invoiceDetails = this.invoiceIds
       .map(id => this.getInvoiceDetails(id));
     Promise.all(this.invoiceDetails)
-      .then(() => setTimeout(window.print));
+      .then(() => this.printBillService.onDataReady());
   }
 
   getInvoiceDetails(invoiceId) {
