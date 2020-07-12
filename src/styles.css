@@ -3,7 +3,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@media print {
+/* @media print {
   .isPrinting > * { display: none; }
   .isPrinting app-print-layout { display: block; }
-}
+} */
