@@ -11,7 +11,7 @@ const routes: Routes = [
     outlet: 'print',
     component: PrintLayoutBillComponent,
     children: [
-      { path: 'invoice', component: PrintInvoiceBillComponent }
+      { path: 'invoice/:invoiceIds', component: PrintInvoiceBillComponent }
     ]
   }
 ];
