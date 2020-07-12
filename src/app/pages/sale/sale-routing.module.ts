@@ -6,17 +6,21 @@ import { PrintLayoutBillComponent } from './components/print-layout-bill/print-l
 import { PrintInvoiceBillComponent } from './components/print-invoice-bill/print-invoice-bill.component';
 
 const routes: Routes = [
-  // { path: '', component: SaleComponent },
   {
     path: 'sales',
     children: [
-      { path: 'print',
-      outlet: 'print',
-      component: PrintLayoutBillComponent,
-      children: [
-        { path: 'invoice', component: PrintInvoiceBillComponent }
-      ]
-    }]
+      {
+        path: '',
+        component: SalesItemComponent,
+      },
+      {
+        path: 'print',
+        outlet: 'print',
+        component: PrintLayoutBillComponent,
+        children: [
+          { path: 'invoice/:invoiceIds', component: PrintInvoiceBillComponent }
+        ]
+      }]
   },
 ];
 
