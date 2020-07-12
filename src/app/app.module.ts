@@ -13,12 +13,16 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { es_ES } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
+import { PrintLayoutBillComponent } from './components/print-layout-bill/print-layout-bill.component';
+import { PrintInvoiceBillComponent } from './components/print-invoice-bill/print-invoice-bill.component';
 
 registerLocaleData(es);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PrintLayoutBillComponent,
+    PrintInvoiceBillComponent
   ],
   imports: [
     BrowserModule,
