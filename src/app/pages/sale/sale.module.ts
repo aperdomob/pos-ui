@@ -12,7 +12,9 @@ import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { ProductSearchComponent } from './components/product-search/product-search.component'
+import { ProductSearchComponent } from './components/product-search/product-search.component';
+import { PrintLayoutBillComponent } from './components/print-layout-bill/print-layout-bill.component';
+import { PrintInvoiceBillComponent } from './components/print-invoice-bill/print-invoice-bill.component'
 
 @NgModule({
   imports: [
@@ -21,7 +23,7 @@ import { ProductSearchComponent } from './components/product-search/product-sear
     DemoNgZorroAntdModule,
     FormsModule
   ],
-  declarations: [SaleComponent, SalesModalComponent, SalesItemComponent, ProductSearchComponent],
+  declarations: [SaleComponent, SalesModalComponent, SalesItemComponent, ProductSearchComponent, PrintLayoutBillComponent, PrintInvoiceBillComponent],
   exports: [SalesItemComponent]
 })
 export class SaleModule { }
