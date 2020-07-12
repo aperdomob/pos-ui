@@ -1,5 +1,10 @@
 .header, .header-space, .footer, .footer-space { height: 100px; }
-.header { position: fixed; top: 0; }
+.header {
+  position: fixed;
+  top: 0;
+  text-align: center;
+}
+
 .footer { position: fixed; bottom: 0; }
 
 @media screen {
