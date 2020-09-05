@@ -78,3 +78,16 @@ nz-content {
   background: #fff;
   height: 100%;
 }
+
+.login {
+  position: absolute;
+  right: 0;
+}
+
+.login button {
+  margin-right: 30px;
+}
+
+.avatar {
+  margin-right: 10px;
+}

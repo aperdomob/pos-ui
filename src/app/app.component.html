@@ -29,6 +29,13 @@
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </span>
+        <span class="login">
+          <nz-avatar nzSize="large" nzIcon="user" class="avatar"></nz-avatar>
+          <button nz-button nzType="primary" nzShape="round" data-onsuccess="onSignIn"><i nz-icon nzType="login"></i>Login</button>
+        </span>
+        <span>
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </span>
       </div>
     </nz-header>
     <nz-content>
